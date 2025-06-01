@@ -1,0 +1,21 @@
+-- Inserimento dei tipi
+INSERT INTO types (name) VALUES ('Normal'), ('Fire'), ('Water'), ('Electric'), ('Grass'), ('Ice'), ('Fighting'), ('Poison'), ('Ground'), ('Flying'), ('Psychic'), ('Bug'), ('Rock'), ('Ghost'), ('Dragon');
+INSERT INTO pokemons (name, slug, description, image_url, number_pokedex) VALUES('Bulbasaur', 'bulbasaur-001', 'Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png', 1),('Ivysaur', 'ivysaur-002', 'There is a bud on its back. To support its weight, Ivysaur’s legs and trunk grow thick and strong. If it starts spending more time lying in the sunlight, it’s a sign that the bud will bloom into a large flower soon.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png', 2),('Venusaur', 'venusaur-003', 'There is a large flower on Venusaur’s back. The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower’s aroma soothes the emotions of people.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png', 3),('Charmander', 'charmander-004', 'The flame that burns at the tip of its tail is an indication of its life. If the flame flickers, it is a sign that Charmander is weakening.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png', 4),('Charmeleon', 'charmeleon-005', 'Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe, it turns aggressive. In this excited state, the flame at the tip of its tail flares with a bluish white color.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png', 5),('Charizard', 'charizard-006', 'Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However, it never turns its fiery breath on any opponent weaker than itself.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png', 6),('Squirtle', 'squirtle-007', 'Squirtle’s shell is not merely used for protection. The shell’s rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pokémon to swim at high speeds.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png', 7),('Wartortle', 'wartortle-008', 'Its tail is large and covered with a rich, thick fur that deepens in color with age. The scratches on its shell are evidence of this Pokémon’s toughness as a battler.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png', 8),('Blastoise', 'blastoise-009', 'Blastoise has water spouts that protrude from its shell. The water spouts are very accurate. They can shoot bullets of water with such precision that they can strike empty tin cans from a distance of over 160 feet.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png', 9),('Caterpie', 'caterpie-010', 'Caterpie has a voracious appetite. It can devour leaves bigger than its body right before your eyes. From its antenna, this Pokémon releases a terrifically strong odor.', 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png', 10);
+-- Inserimento dei Pokémon
+
+-- -- Inserimento delle relazioni Pokémon-Tipi
+-- INSERT INTO pokemon_type (pokemon_id, type_id) VALUES
+-- (1, (SELECT id FROM types WHERE name = 'Grass')),
+-- (1, (SELECT id FROM types WHERE name = 'Poison')),
+-- (2, (SELECT id FROM types WHERE name = 'Grass')),
+-- (2, (SELECT id FROM types WHERE name = 'Poison')),
+-- (3, (SELECT id FROM types WHERE name = 'Grass')),
+-- (3, (SELECT id FROM types WHERE name = 'Poison')),
+-- (4, (SELECT id FROM types WHERE name = 'Fire')),
+-- (5, (SELECT id FROM types WHERE name = 'Fire')),
+-- (6, (SELECT id FROM types WHERE name = 'Fire')),
+-- (6, (SELECT id FROM types WHERE name = 'Flying')),
+-- (7, (SELECT id FROM types WHERE name = 'Water')),
+-- (8, (SELECT id FROM types WHERE name = 'Water')),
+-- (9, (SELECT id FROM types WHERE name = 'Water')),
+-- (10, (SELECT id FROM types WHERE name = 'Bug'));

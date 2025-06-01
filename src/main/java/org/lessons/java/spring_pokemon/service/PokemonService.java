@@ -1,0 +1,62 @@
+package org.lessons.java.spring_pokemon.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.lessons.java.spring_pokemon.model.Pokemon;
+import org.lessons.java.spring_pokemon.repository.PokemonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PokemonService {
+
+    @Autowired
+    private PokemonRepository pokemonRepository;
+
+    public List<Pokemon> findAll() {
+        return pokemonRepository.findAll();
+    }
+
+    public List<Pokemon> findAllSortedByName() {
+        return pokemonRepository.findAll(Sort.by("name"));
+    }
+
+    public Pokemon getById(Integer id) {
+
+        Optional<Pokemon> pokemonAttempt = pokemonRepository.findById(id);
+        return pokemonAttempt.get();
+    }
+
+    public Pokemon getBySlug(String slug) {
+
+        Optional<Pokemon> pokemonAttempt = pokemonRepository.findBySlug(slug);
+        return pokemonAttempt.get();
+    }
+
+    public Pokemon create(Pokemon pokemon) {
+        return pokemonRepository.save(pokemon);
+    }
+
+    public Pokemon update(Pokemon pokemon) {
+        return pokemonRepository.save(pokemon);
+    }
+
+    public void delate(Integer id){
+        Pokemon pokemon= getById(id);
+
+        pokemonRepository.delete(pokemon);
+    }
+
+    public boolean existById(Integer id){
+        return pokemonRepository.existsById(id);
+    }
+    public boolean existByPokemon(Pokemon pokemon){
+        
+        return pokemonRepository.existsById(pokemon.getId());
+    }
+
+
+
+}

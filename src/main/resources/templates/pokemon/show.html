@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
+
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/utils::style}" />
+    <title>Pokemon</title>
+</head>
+<body>
+    
+    <header>
+
+
+    </header>
+
+
+    <main>
+        <div class="container my-4 text-center">
+            <div class="d-flex">
+
+                <div th:if="${pokemon!=null}"  class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                    <div class="col" th:object="${pokemon}">
+                        <div class="card">
+                        <img th:src="@{*{imageUrl}}" class="card-img-top" th:alt="*{name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">[[*{name}]]</h5>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col my-4 d-flex justify-content-center align-items-center" th:object="${pokemon}">
+                        <p>[[*{description}]]</p>
+                    </div>
+                </div>    
+
+                
+
+            </div>
+          
+
+            <div th:unless="${pokemon!=null}">
+
+                <h2>Nessun pokemon trovato</h2>
+
+            </div>
+
+
+        </div>
+
+
+
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
+
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/utils::style}" />
+    <title>Pokemon</title>
+</head>
+<body>
+    
+    <header>
+
+
+    </header>
+
+
+    <main>
+        <div class="container my-4">
+
+
+
+
+            <form id="pokemon-form" th:object="${pokemon}" th:action="@{/pokemons/create}" method="post">
+
+                <div class="mb-3">
+                    <label for="name">Nome</label>
+                    <input type="text" th:field="*{name}" id="name" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="numberPokedex">Pokedex number</label>
+                    <input type="number" th:field="*{numberPokedex}" id="numberPokedex" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('numberPokedex')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('numberPokedex')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description">descrizione</label>
+                    <input type="text" th:field="*{description}" id="description" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('description')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="imageUrl">url immagine</label>
+                    <input type="text" th:field="*{imageUrl}" id="imageUrl" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('imageUrl')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('imageUrl')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="slug">slug</label>
+                    <input type="text" th:field="*{slug}" id="slug" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('slug')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('slug')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary" th:value="|Crea Pizza|"/>
+
+            </form>
+
+
+
+        </div>
+
+
+
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+</body>
+</html>

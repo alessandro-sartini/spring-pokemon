@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
+
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/utils::style}" />
+    <title>Pokemon</title>
+</head>
+<body>
+    
+    <header>
+
+
+    </header>
+
+
+    <main>
+        <div class="container my-4">
+
+            <a class="btn btn-warning my-3" th:href="@{/pokemons/create}">Aggiungi pokemon</a>
+
+            <div th:if="${pokemons.size()>0}"  class="row row-cols-1 row-cols-md-2 g-4">
+                
+                
+                <div class="col" th:each="pokemon: ${pokemons}" th:object="${pokemon}">
+                    <a th:href="@{/pokemons/{slug}(slug=${pokemon.slug})}">
+                        <div class="card">
+                        <img th:src="@{*{imageUrl}}" class="card-img-top" th:alt="*{name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">[[*{name}]]</h5>
+                        </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>    
+          
+
+            <div th:unless="${pokemons.size()>0}">
+
+                <h2>Nessun pokemon trovato</h2>
+
+            </div>
+
+
+        </div>
+
+
+
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+</body>
+</html>
