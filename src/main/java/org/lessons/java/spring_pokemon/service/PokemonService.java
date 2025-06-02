@@ -43,20 +43,29 @@ public class PokemonService {
         return pokemonRepository.save(pokemon);
     }
 
-    public void delate(Integer id){
-        Pokemon pokemon= getById(id);
+    public void delate(Integer id) {
+        Pokemon pokemon = getById(id);
 
         pokemonRepository.delete(pokemon);
     }
 
-    public boolean existById(Integer id){
+    public void delate(String slug) {
+        Pokemon pokemon = getBySlug(slug);
+
+        pokemonRepository.delete(pokemon);
+    }
+
+    public boolean existById(Integer id) {
         return pokemonRepository.existsById(id);
     }
-    public boolean existByPokemon(Pokemon pokemon){
-        
-        return pokemonRepository.existsById(pokemon.getId());
+
+    public boolean existBySlug(String slug) {
+        return pokemonRepository.existsBySlug(slug);
     }
 
+    public boolean existByPokemon(Pokemon pokemon) {
 
+        return pokemonRepository.existsById(pokemon.getId());
+    }
 
 }

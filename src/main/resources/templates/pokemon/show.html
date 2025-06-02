@@ -34,10 +34,16 @@
                         <p>[[*{description}]]</p>
                     </div>
                 </div>    
-
-                
-
             </div>
+
+        <div class="row row-cols-4 my-3">
+            <a class="btn btn-danger" th:href="@{/pokemons/edit/{slug}(slug=${pokemon.slug})}">Modifica Pokemon</a>
+            <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
+
+                <button class="btn btn-success" type="submit">Libera pokemon</button>
+
+            </form>
+        </div>
           
 
             <div th:unless="${pokemon!=null}">

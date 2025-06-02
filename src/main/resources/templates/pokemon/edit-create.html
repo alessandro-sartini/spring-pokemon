@@ -23,7 +23,7 @@
 
 
 
-            <form id="pokemon-form" th:object="${pokemon}" th:action="@{/pokemons/create}" method="post">
+            <form id="pokemon-form" th:object="${pokemon}" th:action=" ${edit}? @{/pokemons/edit/{slug}(slug=*{slug})} :  @{/pokemons/create}" method="post">
 
                 <div class="mb-3">
                     <label for="name">Nome</label>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <input type="submit" class="btn btn-primary" th:value="|Crea Pizza|"/>
+                <input type="submit" class="btn btn-primary" th:value="${edit} ? |Aggiorna pokemon| : |Aggiungi pokemon|"/>
 
             </form>
 

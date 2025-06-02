@@ -32,11 +32,20 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">[[*{name}]]</h5>
                         </div>
-                        </div>
                     </a>
-                </div>
+                    <div class="card-body text-center">
 
-            </div>    
+                        <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
+    
+                        <button class="btn btn-success" type="submit">Libera pokemon</button>
+    
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>    
           
 
             <div th:unless="${pokemons.size()>0}">

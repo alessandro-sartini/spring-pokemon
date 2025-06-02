@@ -35,7 +35,6 @@ public class Pokemon {
     @Size(min = 3, max = 30, message = "The slug must be between 3 and 30 characters")
     private String slug;
 
-    
     @NotBlank
     @Column(nullable = false)
     @Size(min = 5, max = 500, message = "Description must be between 5 and 500 characters")
@@ -103,12 +102,12 @@ public class Pokemon {
     }
 
     // public void generateSlug() {
-    // if (name != null && numberPokedex != null) {
-    // String formattedName = name.toLowerCase().replaceAll("[^a-z0-9]+", "-");
-    // String formattedNumber = String.format("%03d", numberPokedex);
-    // this.slug = formattedName + "-" + formattedNumber;
+    //     if (name != null && numberPokedex != null) {
+    //         String formattedName = name.toLowerCase().replaceAll("[^a-z0-9]+", "-");
+    //         String formattedNumber = String.format("%03d", numberPokedex);
+    //         this.slug = formattedName + "-" + formattedNumber;
 
-    // }
+    //     }
     // }
 
 }
