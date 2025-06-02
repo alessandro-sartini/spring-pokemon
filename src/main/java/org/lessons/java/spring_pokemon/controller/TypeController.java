@@ -4,6 +4,7 @@ import org.lessons.java.spring_pokemon.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,15 +70,17 @@ public class TypeController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        Type typeToDelete= typeService.getById(id);
+    public String delete(@PathVariable Integer id,
+            @RequestParam(value = "redirectTo", defaultValue = "/types") String redirectTo) {
+
+        Type typeToDelete = typeService.getById(id);
 
         for (Pokemon pokemonDelete : typeToDelete.getPokemons()) {
             pokemonDelete.getTypes().remove(typeToDelete);
         }
 
         typeService.delete(id);
-        return"redirect:/types";
+        return "redirect:" + redirectTo;
     }
 
 }

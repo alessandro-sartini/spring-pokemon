@@ -79,17 +79,17 @@ public class PokemonController {
             BindingResult bindingResult, Model model) {
         Pokemon existing = pokemonService.getBySlug(slug);
         // Se lo slug è cambiato e il nuovo slug esiste già per un altro Pokémon, errore
-        if (!pokemon.getSlug().equals(slug) && pokemonService.existBySlug(pokemon.getSlug())) {
-            model.addAttribute("types", typeService.findAll());
+        // if (!pokemon.getSlug().equals(slug) && pokemonService.existBySlug(pokemon.getSlug())) {
+        //     model.addAttribute("types", typeService.findAll());
 
-            bindingResult.rejectValue("slug", "error.pokemon", "Slug già esistente");
-        }
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("types", typeService.findAll());
+        //     bindingResult.rejectValue("slug", "error.pokemon", "Slug già esistente");
+        // }
+        // if (bindingResult.hasErrors()) {
+        //     model.addAttribute("types", typeService.findAll());
 
-            model.addAttribute("edit", true);
-            return "pokemon/edit-create";
-        }
+        //     model.addAttribute("edit", true);
+        //     return "pokemon/edit-create";
+        // }
         pokemon.setId(existing.getId());
         pokemonService.update(pokemon);
         return "redirect:/pokemons/"+ slug;

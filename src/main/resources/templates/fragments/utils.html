@@ -22,7 +22,7 @@
         <th:block th:fragment="navbar">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-warning fw-bold" href="#">Pokémon World</a>
+                    <a class="navbar-brand text-warning fw-bold" th:href="@{/pokemons}">Pokémon World</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -32,7 +32,7 @@
                                 <a class="nav-link text-light" th:href="@{/pokemons}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" th:href="@{/pokemons/create}">Add Pokémon</a>
+                                <a class="nav-link text-light" th:href="@{/types}">Types</a>
                             </li>
                         </ul>
                     </div>

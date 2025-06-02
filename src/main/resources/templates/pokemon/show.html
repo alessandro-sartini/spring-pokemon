@@ -54,7 +54,7 @@
         <div class="row row-cols-4 my-3">
             <a class="btn btn-danger" th:href="@{/pokemons/edit/{slug}(slug=${pokemon.slug})}">Modifica Pokemon</a>
             <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
-
+                <input type="hidden" name="redirectTo" th:value="@{/pokemons/{slug}(slug=${pokemon.slug})}" />
                 <button class="btn btn-success" type="submit">Libera pokemon</button>
 
             </form>
