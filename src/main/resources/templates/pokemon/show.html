@@ -12,7 +12,7 @@
 <body>
     
     <header>
-
+        <th:block th:replace="~{fragments/utils :: navbar}" />
 
     </header>
 
@@ -32,6 +32,21 @@
                     </div>
                     <div class="col my-4 d-flex justify-content-center align-items-center" th:object="${pokemon}">
                         <p>[[*{description}]]</p>
+                    </div>
+
+
+                   <div th:if="${pokemon.types.size()}>0" class="d-flex">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" th:each="type: ${pokemon.types}">
+                                <span th:text="${type.name}">Nome Tipo</span> <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post">
+                                    <button class="btn btn-danger btn-sm" type="submit">elimina</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div th:unless="${pokemon.types.size()}>0" class="d-flex">
+                       <h5>nessun tipo per questo pokemon</h5>
                     </div>
                 </div>    
             </div>
@@ -63,6 +78,7 @@
 
 
     </footer>
+    <th:block th:replace="~{fragments/utils :: js}" />
 
 </body>
 </html>

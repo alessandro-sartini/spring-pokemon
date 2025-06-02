@@ -10,9 +10,8 @@
     <title>Pokemon</title>
 </head>
 <body>
-    
-    <header>
-
+       <header>
+        <th:block th:replace="~{fragments/utils :: navbar}" />
 
     </header>
 
@@ -60,6 +59,7 @@
 
 
     </footer>
+    <th:block th:replace="~{fragments/utils :: js}" />
 
 </body>
 </html>

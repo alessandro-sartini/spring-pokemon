@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lessons.java.spring_pokemon.model.Pokemon;
 import org.lessons.java.spring_pokemon.service.PokemonService;
+import org.lessons.java.spring_pokemon.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/pokemons")
 public class PokemonController {
+    @Autowired
+    private TypeService typeService;
 
     @Autowired
     private PokemonService pokemonService;
@@ -44,6 +47,7 @@ public class PokemonController {
     @GetMapping("/create")
     public String create(Model model) {
 
+        model.addAttribute("types", typeService.findAll());
         model.addAttribute("pokemon", new Pokemon());
 
         return "pokemon/edit-create";
@@ -51,8 +55,10 @@ public class PokemonController {
 
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("pokemon") Pokemon pokemonForm,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("types", typeService.findAll());
+
             return "pokemon/edit-create";
         }
         pokemonService.create(pokemonForm);
@@ -61,6 +67,7 @@ public class PokemonController {
 
     @GetMapping("/edit/{slug}")
     public String edit(Model model, @PathVariable String slug) {
+        model.addAttribute("types", typeService.findAll());
 
         model.addAttribute("pokemon", pokemonService.getBySlug(slug));
         model.addAttribute("edit", true);
@@ -73,9 +80,13 @@ public class PokemonController {
         Pokemon existing = pokemonService.getBySlug(slug);
         // Se lo slug è cambiato e il nuovo slug esiste già per un altro Pokémon, errore
         if (!pokemon.getSlug().equals(slug) && pokemonService.existBySlug(pokemon.getSlug())) {
+            model.addAttribute("types", typeService.findAll());
+
             bindingResult.rejectValue("slug", "error.pokemon", "Slug già esistente");
         }
         if (bindingResult.hasErrors()) {
+            model.addAttribute("types", typeService.findAll());
+
             model.addAttribute("edit", true);
             return "pokemon/edit-create";
         }
@@ -84,14 +95,12 @@ public class PokemonController {
         return "redirect:/pokemons";
     }
 
-
     @PostMapping("/delete/{slug}")
     public String delete(@PathVariable String slug) {
-       
 
         pokemonService.delate(slug);
         return "redirect:/pokemons";
     }
     
-
+    
 }

@@ -53,6 +53,14 @@ public class Pokemon {
     @JoinTable(name = "pokemon_type", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "type_id"))
     private Set<Type> types;
 
+    public Set<Type> getTypes() {
+        return this.types;
+    }
+
+    public void setTypes(Set<Type> types) {
+        this.types = types;
+    }
+
     public Integer getId() {
         return this.id;
     }

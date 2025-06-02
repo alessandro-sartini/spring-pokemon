@@ -9,32 +9,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.lessons.java.spring_pokemon.model.Pokemon;
 import org.lessons.java.spring_pokemon.model.Type;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @Controller
 @RequestMapping("/types")
 public class TypeController {
 
-
-
     @Autowired
     private TypeService typeService;
-
-  
 
     @GetMapping
     public String index(Model model) {
         model.addAttribute("types", typeService.findAll());
         return "type/index";
     }
-    @GetMapping("/{id}")
 
+    @GetMapping("/{id}")
 
     public String show(Model model, @PathVariable Integer id) {
 
@@ -43,7 +36,7 @@ public class TypeController {
     }
 
     @GetMapping("/create")
-    public String create(Model model ) {
+    public String create(Model model) {
 
         model.addAttribute("type", new Type());
         return "type/edit-create";
@@ -59,15 +52,15 @@ public class TypeController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable Integer id ) {
+    public String edit(Model model, @PathVariable Integer id) {
         model.addAttribute("edit", true);
         model.addAttribute("type", typeService.getById(id));
-            return "type/edit-create";
+        return "type/edit-create";
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@Valid @ModelAttribute("type") Type type, 
-        BindingResult bindingResult, @PathVariable Integer id) {
+    public String update(@Valid @ModelAttribute("type") Type type,
+            BindingResult bindingResult, @PathVariable Integer id) {
         if (bindingResult.hasErrors()) {
             return "type/edit-create";
         }
@@ -75,19 +68,16 @@ public class TypeController {
         return "redirect:/types";
     }
 
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
+        Type typeToDelete= typeService.getById(id);
+
+        for (Pokemon pokemonDelete : typeToDelete.getPokemons()) {
+            pokemonDelete.getTypes().remove(typeToDelete);
+        }
+
         typeService.delete(id);
         return"redirect:/types";
     }
-    
-    
-    
-    
-
-
-
-
 
 }

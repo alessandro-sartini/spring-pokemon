@@ -30,6 +30,14 @@ public class Type {
     @ManyToMany(mappedBy = "types")
     private Set<Pokemon> pokemons;
 
+    public Set<Pokemon> getPokemons() {
+        return this.pokemons;
+    }
+
+    public void setPokemons(Set<Pokemon> pokemons) {
+        this.pokemons = pokemons;
+    }
+
 
     public Integer getId() {
         return this.id;
