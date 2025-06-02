@@ -23,6 +23,16 @@ public class PokemonService {
         return pokemonRepository.findAll(Sort.by("name"));
     }
 
+    public Optional<Pokemon> findBySlug(String slug){
+        return pokemonRepository.findBySlug(slug);
+    }
+
+    public Optional<Pokemon> findById(Integer id) {
+
+       
+        return  pokemonRepository.findById(id);
+
+    }
     public Pokemon getById(Integer id) {
 
         Optional<Pokemon> pokemonAttempt = pokemonRepository.findById(id);
