@@ -1,70 +1,52 @@
 <!DOCTYPE html>
 <th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
 
-<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <th:block th:replace="~{fragments/utils::style}" />
-    <title>Pokemon</title>
+    <th:block th:replace="~{fragments/utils :: style}" />
+    <title>Pokémon</title>
 </head>
-<body>
+<body class="bg-light">
     
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
     </header>
 
-
     <main>
         <div class="container my-4">
+            <a class="btn btn-warning btn-lg fw-bold mb-4 rounded-pill" th:href="@{/pokemons/create}">Aggiungi Pokémon</a>
 
-            <a class="btn btn-warning my-3" th:href="@{/pokemons/create}">Aggiungi pokemon</a>
-
-            <div th:if="${pokemons.size()>0}"  class="row row-cols-1 row-cols-md-2 g-4">
-                
-                
+            <div th:if="${pokemons.size() > 0}" class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col" th:each="pokemon: ${pokemons}" th:object="${pokemon}">
-                    <a th:href="@{/pokemons/{slug}(slug=${pokemon.slug})}">
-                        <div class="card">
-                        <img th:src="@{*{imageUrl}}" class="card-img-top" th:alt="*{name}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">[[*{name}]]</h5>
+                    <div class="card border-dark h-100">
+                        <a th:href="@{/pokemons/{slug}(slug=${pokemon.slug})}" class="text-decoration-none">
+                            <img th:src="@{*{imageUrl}}" class="card-img-top p-3 bg-white" th:alt="*{name}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-primary fw-bold text-capitalize">[[*{name}]]</h5>
+                            </div>
+                        </a>
+                        <div class="card-body text-center d-flex justify-content-center">
+                            <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
+                                <button class="btn btn-success fw-bold rounded-pill mx-auto" type="submit">Libera Pokémon</button>
+                            </form>
                         </div>
-                    </a>
-                    <div class="card-body text-center">
-
-                        <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
-    
-                        <button class="btn btn-success" type="submit">Libera pokemon</button>
-    
-                        </form>
                     </div>
-
                 </div>
             </div>
 
-        </div>    
-          
-
-            <div th:unless="${pokemons.size()>0}">
-
-                <h2>Nessun pokemon trovato</h2>
-
+            <div th:unless="${pokemons.size() > 0}" class="text-center">
+                <h2 class="text-danger fw-bold">Nessun Pokémon trovato</h2>
             </div>
-
-
         </div>
-
-
-
     </main>
 
     <footer>
+        <th:block th:replace="~{fragments/utils :: footer}" />
 
 
     </footer>
-    <th:block th:replace="~{fragments/utils :: js}" />
 
+    <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

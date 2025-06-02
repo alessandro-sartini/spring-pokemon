@@ -92,14 +92,14 @@ public class PokemonController {
         }
         pokemon.setId(existing.getId());
         pokemonService.update(pokemon);
-        return "redirect:/pokemons";
+        return "redirect:/pokemons/"+ slug;
     }
 
     @PostMapping("/delete/{slug}")
     public String delete(@PathVariable String slug) {
 
         pokemonService.delate(slug);
-        return "redirect:/pokemons";
+        return "redirect:/pokemons" ;
     }
     
     
