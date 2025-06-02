@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
+
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/utils::style}" />
+    <title>Pokemon</title>
+</head>
+<body>
+    
+    <header>
+
+
+    </header>
+
+
+    <main>
+        <div class="container my-4 text-center">
+            <div class="">
+
+                <div th:if="${type!=null}"  class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                    <div class="col" th:object="${type}">
+                        <div class="card">
+                            <h5 class="card-title">[[*{name}]]</h5>
+                        </div>
+                    </div>
+        
+                </div>    
+            </div>
+
+        <div class="row row-cols-4 my-3">
+            <!-- <a class="btn btn-danger" th:href="@{/pokemons/edit/{slug}(slug=${pokemon.slug})}">Modifica Pokemon</a> -->
+            <!-- <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
+
+                <button class="btn btn-success" type="submit">Libera pokemon</button>
+
+            </form> -->
+        </div>
+          
+
+            <div th:unless="${type!=null}">
+
+                <h2>Nessun tipo trovato</h2>
+
+            </div>
+
+
+        </div>
+
+
+
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+</body>
+</html>

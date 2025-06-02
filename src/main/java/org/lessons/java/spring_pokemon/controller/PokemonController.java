@@ -53,7 +53,6 @@ public class PokemonController {
     public String create(@Valid @ModelAttribute("pokemon") Pokemon pokemonForm,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("--- ERRORI DI VALIDAZIONE ---");
             return "pokemon/edit-create";
         }
         pokemonService.create(pokemonForm);

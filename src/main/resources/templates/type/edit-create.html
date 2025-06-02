@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
+
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/utils::style}" />
+    <title>Pokemon</title>
+</head>
+<body>
+    
+    <header>
+
+
+    </header>
+
+
+    <main>
+        <div class="container my-4">
+
+
+
+
+            <form id="type-form" th:object="${type}" th:action=" ${edit}? @{/types/edit/{id}(id=*{id})} :  @{/types/create}" method="post">
+
+                <div class="mb-3">
+                    <label for="name">Nome</label>
+                    <input type="text" th:field="*{name}" id="name" th:errorclass="is-invalid">
+                     <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+
+                        <ul>
+                            <li  th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
+                        </ul>
+
+                    </div>
+                </div>
+                
+                <input type="submit" class="btn btn-primary" th:value="${edit} ? |Aggiorna pokemon| : |Aggiungi pokemon|"/>
+
+            </form>
+
+
+
+        </div>
+
+
+
+    </main>
+
+    <footer>
+
+
+    </footer>
+
+</body>
+</html>
