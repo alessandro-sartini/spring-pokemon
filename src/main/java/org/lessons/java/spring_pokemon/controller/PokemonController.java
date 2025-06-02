@@ -78,29 +78,23 @@ public class PokemonController {
     public String update(@PathVariable String slug, @Valid @ModelAttribute("pokemon") Pokemon pokemon,
             BindingResult bindingResult, Model model) {
         Pokemon existing = pokemonService.getBySlug(slug);
-        // Se lo slug è cambiato e il nuovo slug esiste già per un altro Pokémon, errore
-        // if (!pokemon.getSlug().equals(slug) && pokemonService.existBySlug(pokemon.getSlug())) {
-        //     model.addAttribute("types", typeService.findAll());
 
-        //     bindingResult.rejectValue("slug", "error.pokemon", "Slug già esistente");
-        // }
-        // if (bindingResult.hasErrors()) {
-        //     model.addAttribute("types", typeService.findAll());
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("types", typeService.findAll());
 
-        //     model.addAttribute("edit", true);
-        //     return "pokemon/edit-create";
-        // }
+            return "pokemon/edit-create";
+        }
+
         pokemon.setId(existing.getId());
         pokemonService.update(pokemon);
-        return "redirect:/pokemons/"+ slug;
+        return "redirect:/pokemons/" + slug;
     }
 
     @PostMapping("/delete/{slug}")
     public String delete(@PathVariable String slug) {
 
         pokemonService.delate(slug);
-        return "redirect:/pokemons" ;
+        return "redirect:/pokemons";
     }
-    
-    
+
 }

@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
+    @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/pokemons/create", "/pokemons/edit/**").hasAuthority("ADMIN")
@@ -22,24 +23,29 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/types/delete/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/pokemons/delete/**").hasAuthority("ADMIN")
                 .requestMatchers("/types", "/types/**").hasAuthority("ADMIN")
-                .requestMatchers("/pokemons", "/pokemons/**").hasAnyAuthority("ADMIN", "USER")
-                .and().formLogin()
-                .and().logout()
-                .and().exceptionHandling()
-                .and().csrf().disable();
-
-
-                
-                
+                .requestMatchers("/pokemons", "/pokemons/**").hasAnyAuthority("ADMIN", "USER")              
+                .and()
+                .formLogin()
+                .and()
+                .logout()
+                .and()
+                .exceptionHandling()
+                .and()
+                .csrf().disable();
 
         return http.build();
     }
 
     @Bean
+    @SuppressWarnings("deprecation")
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        // user detail service
         authenticationProvider.setUserDetailsService(userDetailService());
+
+        // scegliere il password encoder stabilito
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+
         return authenticationProvider;
     }
 
@@ -52,4 +58,5 @@ public class SecurityConfiguration {
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }

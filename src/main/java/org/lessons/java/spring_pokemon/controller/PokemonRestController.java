@@ -28,6 +28,13 @@ public class PokemonRestController {
 
         return pokemonService.findAll();
     }
+
+    
+    @GetMapping("/sortedByName")
+    public List<Pokemon> indexByName() {
+
+        return pokemonService.findAllSortedByName();
+    }
     
 
 
