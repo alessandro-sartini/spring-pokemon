@@ -19,6 +19,14 @@ public class PokemonService {
         return pokemonRepository.findAll();
     }
 
+    public List<Pokemon> findAll(Optional<String> typeName) {
+        if (typeName.isPresent() && !typeName.get().isBlank()) {
+            return pokemonRepository.findByTypesNameContainingIgnoreCase(typeName.get());
+        } else {
+            return pokemonRepository.findAll();
+        }
+    }
+
     public List<Pokemon> findAllSortedByName() {
         return pokemonRepository.findAll(Sort.by("name"));
     }

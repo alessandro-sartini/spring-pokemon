@@ -15,4 +15,6 @@ public interface PokemonRepository extends JpaRepository<Pokemon,Integer> {
     public List<Pokemon> findByNameContaining(String name);
 
     public boolean existsBySlug(String slug);
+
+    List<Pokemon> findByTypesNameContainingIgnoreCase(String typeName);
 }

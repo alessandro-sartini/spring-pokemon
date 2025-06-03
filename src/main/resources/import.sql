@@ -19,3 +19,9 @@ INSERT INTO pokemons (name, slug, description, image_url, number_pokedex) VALUES
 -- (8, (SELECT id FROM types WHERE name = 'Water')),
 -- (9, (SELECT id FROM types WHERE name = 'Water')),
 -- (10, (SELECT id FROM types WHERE name = 'Bug'));
+
+-- user
+
+INSERT INTO roles (id, name) VALUES (1, 'ADMIN');
+INSERT INTO users (id, username, password) VALUES (2, 'admin', '{noop}123456');
+INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
