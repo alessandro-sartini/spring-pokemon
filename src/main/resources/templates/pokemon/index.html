@@ -7,7 +7,7 @@
     <th:block th:replace="~{fragments/utils :: style}" />
     <title>Pokémon</title>
 </head>
-<body class="bg-light">
+<body class="">
     
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
@@ -15,18 +15,27 @@
 
     <main>
         <div class="container my-4">
-            <a class="btn btn-warning btn-lg fw-bold mb-4 rounded-pill" th:href="@{/pokemons/create}">Aggiungi Pokémon</a>
+            <div class="d-flex justify-content-between align-items-center mb-4">
 
+                <a class="btn btn-warning btn-lg fw-bold rounded-pill" th:href="@{/pokemons/create}">Aggiungi Pokémon</a>
+                <form th:action="@{/pokemons/search}" class=" flex-grow-1" style="max-width: 500px;">
+                    <div class="input-group">
+                        <input type="text" required name="query" class="form-control" placeholder="Cerca Pokémon per nome...">
+                        <button type="submit" class="btn btn-primary">Cerca</button>
+                    </div>
+                </form>
+
+            </div>
             <div th:if="${pokemons.size() > 0}" class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col" th:each="pokemon: ${pokemons}" th:object="${pokemon}">
                     <div class="card border-dark h-100">
                         <a th:href="@{/pokemons/{slug}(slug=${pokemon.slug})}" class="text-decoration-none">
                             <img th:src="@{*{imageUrl}}" class="card-img-top p-3 bg-white" th:alt="*{name}">
-                            <div class="card-body text-center">
+                            <div class="card-body text-center bg-light">
                                 <h5 class="card-title text-primary fw-bold text-capitalize">[[*{name}]]</h5>
                             </div>
                         </a>
-                        <div class="card-body text-center d-flex justify-content-center">
+                        <div class="card-body text-center d-flex justify-content-center bg-light">
                             <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
                                 <button class="btn btn-success fw-bold rounded-pill mx-auto" type="submit">Libera Pokémon</button>
                             </form>

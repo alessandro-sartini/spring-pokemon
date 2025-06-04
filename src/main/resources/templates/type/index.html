@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
 
-<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="~{fragments/utils::style}" />
-    <title>Pokemon</title>
+    <title>Lista Tipi Pokémon</title>
 </head>
-<body>
-       <header>
+<body class="text-white">
+    
+    <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
-
     </header>
-
 
     <main>
         <div class="container my-4">
+            <h1 class="text-center mb-4">Gestione Tipi Pokémon</h1>
 
-                <a class="m-3 btn btn-primary" th:href="@{/types/create}">aggiungi tipo</a> 
-
-            <div th:if="${types.size()>0}"  class="row row-cols-1 row-cols-md-2 g-4">
-
-                <ul>
-                    <li th:each="type :${types}" >[[${type.name}]] 
-                        <a class="m-3 btn btn-primary" th:href="@{/types/{id}(id=${type.id})}">visualizza</a> 
-                        <a class="m-3 btn btn-primary" th:href="@{/types/edit/{id}(id=${type.id})}">modeifica</a> 
-                        <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post">
-
-                            <button class="btn btn-danger" type="submit">elimina</button>
-
-                        </form>
-                    </li>
-                </ul>
-
-            </div>  
-                
-                   
-
-        </div>    
-          
-
-            <div th:unless="${types.size()>0}">
-
-                <h2>Nessun pokemon trovato</h2>
-
+            
+            <div class="d-flex justify-content-center mb-4">
+                <a class="btn btn-warning btn-lg fw-bold rounded-pill" th:href="@{/types/create}">Aggiungi Tipo</a> 
             </div>
 
-
+           
+            <div th:if="${types.size() > 0}" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+               
+                <div class="col" th:each="type : ${types}" th:object="${type}">
+                    <div class="card h-100 border-light bg-dark text-white shadow-lg"> 
+                        <div class="card-body text-center d-flex flex-column justify-content-between align-items-center">
+                            <h5 class="card-title text-capitalize mb-3" th:text="*{name}"
+                                th:classappend="${'type-' + type.name.toLowerCase()}"> 
+                                
+                            </h5>
+                            <div class="d-flex gap-2 justify-content-center mt-auto"> 
+                                <!-- <a class="btn btn-sm btn-info" th:href="@{/types/{id}(id=${type.id})}">Visualizza</a>  -->
+                                <a class="btn btn-sm btn-primary" th:href="@{/types/edit/{id}(id=${type.id})}">Modifica</a> 
+                                <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post" class="d-inline">
+                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Sei sicuro di voler eliminare questo tipo?')">Elimina</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <!-- Messaggio "Nessun tipo trovato" -->
+            <div th:unless="${types.size() > 0}" class="text-center py-5">
+                <h2 class="text-warning fw-bold">Nessun tipo trovato</h2>
+                <p class="text-muted">Inizia aggiungendo un nuovo tipo.</p>
+            </div>
         </div>
-
-
-
     </main>
 
-   <footer>
-    <th:block th:replace="~{fragments/utils :: footer}" />
-
-
+    <footer>
+        <th:block th:replace="~{fragments/utils :: footer}" />
     </footer>
-    <th:block th:replace="~{fragments/utils :: js}" />
 
+    <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

@@ -47,6 +47,12 @@ public class PokemonService {
         return pokemonAttempt.get();
     }
 
+    public List<Pokemon> serchByName(String query){
+      
+
+        return   pokemonRepository.findByNameContaining(query);
+    }
+
     public Pokemon getBySlug(String slug) {
 
         Optional<Pokemon> pokemonAttempt = pokemonRepository.findBySlug(slug);

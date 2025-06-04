@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <th:block th:replace="~{fragments/utils :: thymeleaf&thema}"/>
 
-<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="~{fragments/utils::style}" />
-    <title>Pokemon</title>
+    <title th:text="${edit} ? 'Modifica Tipo' : 'Crea Nuovo Tipo'"></title>
 </head>
-<body>
+<body class=" text-white">
     
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
-
     </header>
 
-
     <main>
-        <div class="container my-4">
+        <div class="container my-5">
+         
+<h1 class="text-center mb-5" th:text="${edit} ? 'Modifica Tipo Pokémon: ' + ${type.name} : 'Crea Nuovo Tipo Pokémon'"></h1>
+            
+            <div class="card bg-secondary text-white border-light shadow-lg mx-auto" style="max-width: 500px;">
+                <div class="card-body p-4">
+                    <form id="type-form" th:object="${type}" th:action="${edit} ? @{/types/edit/{id}(id=*{id})} : @{/types/create}" method="post">
 
-
-
-
-            <form id="type-form" th:object="${type}" th:action=" ${edit}? @{/types/edit/{id}(id=*{id})} :  @{/types/create}" method="post">
-
-                <div class="mb-3">
-                    <label for="name">Nome</label>
-                    <input type="text" th:field="*{name}" id="name" th:errorclass="is-invalid">
-                     <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-
-                        <ul>
-                            <li  th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
-                        </ul>
-
-                    </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome Tipo</label>
+                            <input type="text" th:field="*{name}" id="name" class="form-control" th:errorclass="is-invalid" placeholder="Inserisci il nome del tipo">
+                            <!-- Messaggio di errore di validazione -->
+                            <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                                <ul class="list-unstyled mb-0"> 
+                                    <li th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Pulsante di submit dinamico -->
+                        <div class="d-grid gap-2 mt-4"> 
+                            <input 
+                                type="submit" 
+                                class="btn btn-warning btn-lg fw-bold" 
+                                th:value="${edit} ? 'Modifica Tipo' : 'Aggiungi Tipo'"
+                            />
+                            <!-- Pulsante per tornare indietro -->
+                            <a th:href="@{/types}" class="btn btn-outline-light btn-lg">Annulla</a>
+                        </div>
+                    </form>
                 </div>
-                
-                <input type="submit" class="btn btn-primary" th:value="${edit} ? |Aggiorna pokemon| : |Aggiungi pokemon|"/>
-
-            </form>
-
-
-
+            </div>
         </div>
-
-
-
     </main>
 
     <footer>
-    <th:block th:replace="~{fragments/utils :: footer}" />
-
-
+        <th:block th:replace="~{fragments/utils :: footer}" />
     </footer>
-    <th:block th:replace="~{fragments/utils :: js}" />
 
+    <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

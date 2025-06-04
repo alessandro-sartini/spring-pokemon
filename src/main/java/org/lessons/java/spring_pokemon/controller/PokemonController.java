@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/pokemons")
@@ -52,6 +54,15 @@ public class PokemonController {
 
         return "pokemon/edit-create";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        List<Pokemon> pokemons= pokemonService.serchByName(query);
+        model.addAttribute("pokemons", pokemons);
+
+        return "pokemon/index";
+    }
+    
 
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("pokemon") Pokemon pokemonForm,
