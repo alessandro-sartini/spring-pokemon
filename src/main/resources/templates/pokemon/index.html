@@ -45,7 +45,7 @@
                             
                             
                             >
-                                Elimina
+                                Libera
                             </button >
                             
                             <!-- <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
@@ -56,16 +56,16 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" th:id="${'delete-modal-' + slug + 'Label'}">Conferma Eliminazione</h5>
+                                                    <h5 class="modal-title" th:id="${'delete-modal-' + slug + 'Label'}">Conferma liberazione</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Sei sicuro di voler eliminare la pokemon <strong th:text="*{name}"></strong>? Questa azione è irreversibile.
+                                                    Sei sicuro di voler liberare il pokemon <strong th:text="*{name}"></strong>? Questa azione è irreversibile.
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                                     <form th:id="*{'deletePokemonForm-' + id}" th:action="@{/pokemons/delete/{slug}(slug=*{slug})}" method="post">
-                                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                                        <button type="submit" class="btn btn-danger">Libera</button>
                                                     </form>
                                                 </div>
                                             </div>

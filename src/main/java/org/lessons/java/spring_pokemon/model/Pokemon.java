@@ -109,13 +109,5 @@ public class Pokemon {
         this.numberPokedex = numberPokedex;
     }
 
-    // public void generateSlug() {
-    //     if (name != null && numberPokedex != null) {
-    //         String formattedName = name.toLowerCase().replaceAll("[^a-z0-9]+", "-");
-    //         String formattedNumber = String.format("%03d", numberPokedex);
-    //         this.slug = formattedName + "-" + formattedNumber;
-
-    //     }
-    // }
 
 }
