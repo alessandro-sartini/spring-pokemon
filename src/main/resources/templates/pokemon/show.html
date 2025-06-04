@@ -32,13 +32,14 @@
                         <h4 class="mb-3">Tipi:</h4>
                         <div th:if="${pokemon.types.size() > 0}" class="d-flex flex-wrap gap-2 justify-content-center"> 
                             <ul class="list-group list-group-horizontal flex-wrap">
-                                <li class="list-group-item d-flex align-items-center px-3 py-2 border-0 rounded-pill shadow-sm" 
+                                <li class="list-group-item d-flex align-items-center px-3 py-2 border-0 rounded-pill shadow-sm d-flex flex-column" 
                                     th:each="type: ${pokemon.types}" 
-                                    th:classappend="${'type-' + type.name.toLowerCase()}"> <span class="fw-bold me-2" th:text="${type.name}">Nome Tipo</span>
-                                    <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post" class="d-inline">
-                                        <button class="btn btn-sm btn-outline-light" type="submit" title="Elimina tipo">
-                                            <i class="bi bi-x-lg"></i> </button>
-                                    </form>
+                                    > <h3 class="fw-bold me-2" th:text="${type.name}">Nome Tipo</span>
+                                    <!-- <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post" class="d-inline">
+                                        <button class="btn btn-sm btn-outline-light" type="submit" title="Elimina tipo"> elimina tipo</button>
+
+                                           
+                                    </form> -->
                                 </li>
                             </ul>
                         </div>
@@ -52,7 +53,6 @@
                     <div class="col-12 col-md-6 col-lg-4 d-grid gap-3"> 
                         <a class="btn btn-warning btn-lg fw-bold" th:href="@{/pokemons/edit/{slug}(slug=${pokemon.slug})}">Modifica Pokémon</a>
                         <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post" class="d-grid">
-                            <input type="hidden" name="redirectTo" th:value="@{/pokemons}" /> 
                             <button class="btn btn-danger btn-lg fw-bold" type="submit" onclick="return confirm('Sei sicuro di voler liberare questo Pokémon?')">Libera Pokémon</button>
                         </form>
                     </div>

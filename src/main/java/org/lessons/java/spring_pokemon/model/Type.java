@@ -1,6 +1,6 @@
 package org.lessons.java.spring_pokemon.model;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,13 +28,13 @@ public class Type {
 
     @JsonBackReference
     @ManyToMany(mappedBy = "types")
-    private Set<Pokemon> pokemons;
+    private List<Pokemon> pokemons;
 
-    public Set<Pokemon> getPokemons() {
+    public List<Pokemon> getPokemons() {
         return this.pokemons;
     }
 
-    public void setPokemons(Set<Pokemon> pokemons) {
+    public void setPokemons(List<Pokemon> pokemons) {
         this.pokemons = pokemons;
     }
 

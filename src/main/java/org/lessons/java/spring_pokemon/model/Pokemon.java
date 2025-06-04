@@ -1,6 +1,6 @@
 package org.lessons.java.spring_pokemon.model;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,13 +51,13 @@ public class Pokemon {
 
     @ManyToMany
     @JoinTable(name = "pokemon_type", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "type_id"))
-    private Set<Type> types;
+    private List<Type> types;
 
-    public Set<Type> getTypes() {
+    public List<Type> getTypes() {
         return this.types;
     }
 
-    public void setTypes(Set<Type> types) {
+    public void setTypes(List<Type> types) {
         this.types = types;
     }
 

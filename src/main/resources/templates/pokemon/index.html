@@ -36,9 +36,43 @@
                             </div>
                         </a>
                         <div class="card-body text-center d-flex justify-content-center bg-light">
-                            <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
+
+                            <button 
+                            class="btn btn-success fw-bold rounded-pill mx-auto"
+                            th:data-bs-target="'#delete-modal-'+*{slug}"
+                            data-bs-toggle="modal"
+                            th:data-pokemon-name="*{name}"
+                            
+                            
+                            >
+                                Elimina
+                            </button >
+                            
+                            <!-- <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
                                 <button class="btn btn-success fw-bold rounded-pill mx-auto" type="submit">Libera Pokémon</button>
-                            </form>
+                            </form> -->
+                            <div class="modal fade" th:id="*{'delete-modal-' + slug}" tabindex="-1" 
+                                        th:aria-labelledby="${'delete-modal-' + slug + 'Label'}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" th:id="${'delete-modal-' + slug + 'Label'}">Conferma Eliminazione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Sei sicuro di voler eliminare la pokemon <strong th:text="*{name}"></strong>? Questa azione è irreversibile.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                    <form th:id="*{'deletePokemonForm-' + id}" th:action="@{/pokemons/delete/{slug}(slug=*{slug})}" method="post">
+                                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                         </div>
                     </div>
                 </div>
