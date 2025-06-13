@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/types", "/types/**").hasAuthority("ADMIN")
                 .requestMatchers("/pokemons", "/pokemons/**").hasAnyAuthority("ADMIN", "USER")              
                 .and()
-                .formLogin()
+                .formLogin().defaultSuccessUrl("/pokemons")
                 .and()
                 .logout()
                 .and()
