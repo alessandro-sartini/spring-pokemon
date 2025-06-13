@@ -15,84 +15,90 @@
     </header>
     <main class="flex-grow-1">
         <div class="container py-5">
-            <h2 class="mb-4 text-center" th:text="${edit} ? 'Modifica Pokémon' : 'Crea Pokémon'"></h2>
-            <form id="pokemon-form" th:object="${pokemon}" th:action=" ${edit}? @{/pokemons/edit/{slug}(slug=*{slug})} :  @{/pokemons/create}" method="post" class="mx-auto" style="max-width: 600px;">
-                <div class="mb-3 row">
-                    <label for="name" class="col-sm-3 col-form-label">Nome</label>
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{name}" id="name" th:errorclass="is-invalid" class="form-control">
-                        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-                            <ul class="mb-0 ps-3">
-                                <li th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="numberPokedex" class="col-sm-3 col-form-label">Pokedex number</label>
-                    <div class="col-sm-9">
-                        <input type="number" th:field="*{numberPokedex}" id="numberPokedex" th:errorclass="is-invalid" class="form-control">
-                        <div th:if="${#fields.hasErrors('numberPokedex')}" class="invalid-feedback">
-                            <ul class="mb-0 ps-3">
-                                <li th:each="error: ${#fields.errors('numberPokedex')}" th:text="${error}"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="description" class="col-sm-3 col-form-label">Descrizione</label>
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{description}" id="description" th:errorclass="is-invalid" class="form-control">
-                        <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
-                            <ul class="mb-0 ps-3">
-                                <li th:each="error: ${#fields.errors('description')}" th:text="${error}"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="imageUrl" class="col-sm-3 col-form-label">URL immagine</label>
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{imageUrl}" id="imageUrl" th:errorclass="is-invalid" class="form-control">
-                        <div th:if="${#fields.hasErrors('imageUrl')}" class="invalid-feedback">
-                            <ul class="mb-0 ps-3">
-                                <li th:each="error: ${#fields.errors('imageUrl')}" th:text="${error}"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="slug" class="col-sm-3 col-form-label">Slug</label>
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{slug}" id="slug" th:errorclass="is-invalid" class="form-control">
-                        <div th:if="${#fields.hasErrors('slug')}" class="invalid-feedback">
-                            <ul class="mb-0 ps-3">
-                                <li th:each="error: ${#fields.errors('slug')}" th:text="${error}"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- type -->
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Tipi:</label>
-                    <div class="col-sm-9">
-                        <div th:if="${types}!=null">
-                            <div class="d-flex flex-wrap gap-2" th:each="type: ${types}">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" th:value="${type.id}" th:id="|type-${type.id}|" th:field="${pokemon.types}">
-                                    <label class="form-check-label" th:for="|type-${type.id}|" th:text="${type.name}"></label>
+            <h2 class="my-4 text-center" th:text="${edit} ? 'Modifica Pokémon' : 'Crea Pokémon'"></h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-8 my-3">
+                    <form id="pokemon-form" th:object="${pokemon}" th:action=" ${edit}? @{/pokemons/edit/{slug}(slug=*{slug})} :  @{/pokemons/create}" method="post">
+                        <div class="mb-3 row">
+                            <label for="name" class="col-sm-3 col-form-label">Nome</label>
+                            <div class="col-sm-9">
+                                <input type="text" th:field="*{name}" id="name" th:errorclass="is-invalid" class="form-control">
+                                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                                    <ul class="mb-0 ps-3">
+                                        <li th:each="error: ${#fields.errors('name')}" th:text="${error}"></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div th:unless="${types}!=null">
-                            <span class="form-text">Nessun tipo disponibile per questo pokemon</span>
+                        <div class="mb-3 row">
+                            <label for="numberPokedex" class="col-sm-3 col-form-label">Pokedex number</label>
+                            <div class="col-sm-9">
+                                <input type="number" th:field="*{numberPokedex}" id="numberPokedex" th:errorclass="is-invalid" class="form-control">
+                                <div th:if="${#fields.hasErrors('numberPokedex')}" class="invalid-feedback">
+                                    <ul class="mb-0 ps-3">
+                                        <li th:each="error: ${#fields.errors('numberPokedex')}" th:text="${error}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="description" class="col-sm-3 col-form-label">Descrizione</label>
+                            <div class="col-sm-9">
+                                <input type="text" th:field="*{description}" id="description" th:errorclass="is-invalid" class="form-control">
+                                <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+                                    <ul class="mb-0 ps-3">
+                                        <li th:each="error: ${#fields.errors('description')}" th:text="${error}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="imageUrl" class="col-sm-3 col-form-label">URL immagine</label>
+                            <div class="col-sm-9">
+                                <input type="text" th:field="*{imageUrl}" id="imageUrl" th:errorclass="is-invalid" class="form-control">
+                                <div th:if="${#fields.hasErrors('imageUrl')}" class="invalid-feedback">
+                                    <ul class="mb-0 ps-3">
+                                        <li th:each="error: ${#fields.errors('imageUrl')}" th:text="${error}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="slug" class="col-sm-3 col-form-label">Slug</label>
+                            <div class="col-sm-9">
+                                <input type="text" th:field="*{slug}" id="slug" th:errorclass="is-invalid" class="form-control">
+                                <div th:if="${#fields.hasErrors('slug')}" class="invalid-feedback">
+                                    <ul class="mb-0 ps-3">
+                                        <li th:each="error: ${#fields.errors('slug')}" th:text="${error}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Spazio per il bottone -->
+                        <div class="d-flex justify-content-end mt-5">
+                            <input type="submit" class="btn btn-primary btn-lg px-5" th:value="${edit} ? |Aggiorna pokemon| : |Aggiungi pokemon|"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
+                    <div class="card bg-secondary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Tipi disponibili</h5>
+                            <div th:if="${types}!=null">
+                                <div class="d-flex flex-column gap-2" th:each="type: ${types}">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" th:value="${type.id}" th:id="|type-${type.id}|" th:field="${pokemon.types}">
+                                        <label class="form-check-label" th:for="|type-${type.id}|" th:text="${type.name}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:unless="${types}!=null">
+                                <span class="form-text">Nessun tipo disponibile per questo pokemon</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="text-end">
-                    <input type="submit" class="btn btn-primary btn-lg px-5" th:value="${edit} ? |Aggiorna pokemon| : |Aggiungi pokemon|"/>
-                </div>
-            </form>
+            </div>
         </div>
     </main>
     <footer class="bg-dark text-light py-3 mt-auto w-100 text-center border-top border-secondary">
