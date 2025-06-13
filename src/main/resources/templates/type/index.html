@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="~{fragments/utils::style}" />
-    <title>Lista Tipi Pokémon</title>
+    <title>Types</title>
 </head>
-<body class="text-white">
+<body class="text-white d-flex flex-column min-vh-100">
     
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
     </header>
-
-    <main>
+    <main class="flex-grow-1">
         <div class="container my-4">
             <h1 class="text-center mb-4">Gestione Tipi Pokémon</h1>
 
@@ -51,11 +50,9 @@
             </div>
         </div>
     </main>
-
-    <footer>
+    <footer class="bg-dark text-light py-3 mt-auto w-100 text-center">
         <th:block th:replace="~{fragments/utils :: footer}" />
     </footer>
-
     <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

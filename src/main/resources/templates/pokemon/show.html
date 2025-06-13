@@ -5,41 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <th:block th:replace="~{fragments/utils::style}" />
-    <title>Pokemon Dettaglio</title>
+    <title th:text="${pokemon.name}"></title>
 </head>
-<body class=""> 
+<body class="bg-dark text-white d-flex flex-column min-vh-100"> 
     
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
     </header>
-
-    <main>
-        <div class="container my-4">
+    <main class="flex-grow-1">
+        <div class="container my-5">
             <div th:if="${pokemon!=null}" th:object="${pokemon}">
-                <h1 class="text-center mb-4 text-capitalize">[[*{name}]]</h1>
-
-                <div class="row g-4 align-items-center mb-4">
-                    <div class="col-12 col-md-5 d-flex justify-content-centerbg-light me-3">
-                        <img th:src="@{*{imageUrl}}" class="bg-light rounded shadow-sm" th:alt="*{name}" style="min-height: 400px; object-fit: contain;">
+                <h1 class="text-center my-5 text-capitalize ">[[*{name}]]</h1>
+                <div class="row g-5 align-items-center mb-5">
+                    <div class="col-12 col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+                        <img th:src="@{*{imageUrl}}" class="bg-light rounded shadow-sm" th:alt="*{name}" style="min-height: 320px; max-height: 420px; object-fit: contain;">
                     </div>
-                    <div class="col-12 col-md-6">
-                        <p class="lead text-justify">[[*{description}]]</p>
+                    <div class="col-12 col-md-7">
+                        <p class="lead">[[*{description}]]</p>
                     </div>
                 </div>
-
-                <div class="row mb-4">
+                <div class="row mb-5">
                     <div class="col-12 d-flex flex-column align-items-center"> 
                         <h4 class="mb-3">Tipi:</h4>
-                        <div th:if="${pokemon.types.size() > 0}" class="d-flex flex-wrap gap-2 justify-content-center"> 
+                        <div th:if="${pokemon.types.size() > 0}" class="d-flex flex-wrap gap-3 justify-content-center"> 
                             <ul class="list-group list-group-horizontal flex-wrap">
-                                <li class="list-group-item d-flex align-items-center px-3 py-2 border-0 rounded-pill shadow-sm d-flex flex-column" 
-                                    th:each="type: ${pokemon.types}" 
-                                    > <h3 class="fw-bold me-2" th:text="${type.name}">Nome Tipo</span>
-                                    <!-- <form th:action="@{/types/delete/{id}(id=${type.id})}" method="post" class="d-inline">
-                                        <button class="btn btn-sm btn-outline-light" type="submit" title="Elimina tipo"> elimina tipo</button>
-
-                                           
-                                    </form> -->
+                                <li class="list-group-item d-flex align-items-center px-4 py-2 border-0 rounded-pill shadow-sm bg-secondary text-white mx-2 mb-2" 
+                                    th:each="type: ${pokemon.types}" >
+                                    <h5 class="fw-bold mb-0" th:text="${type.name}"></h5>
                                 </li>
                             </ul>
                         </div>
@@ -48,8 +40,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-12 col-md-6 col-lg-4 d-grid gap-3"> 
                         <a class="btn btn-warning btn-lg fw-bold" th:href="@{/pokemons/edit/{slug}(slug=${pokemon.slug})}">Modifica Pokémon</a>
                         <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post" class="d-grid">
@@ -58,18 +49,15 @@
                     </div>
                 </div>
             </div>
-            
             <div th:unless="${pokemon!=null}" class="text-center py-5">
                 <h2 class="text-danger fw-bold">Pokémon non trovato</h2>
                 <a th:href="@{/pokemons}" class="btn btn-primary mt-3">Torna al Pokedex</a>
             </div>
         </div>
     </main>
-
-    <footer>
+    <footer class="bg-dark text-light py-3 mt-auto w-100 text-center border-top border-secondary">
         <th:block th:replace="~{fragments/utils :: footer}" />
     </footer>
-
     <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

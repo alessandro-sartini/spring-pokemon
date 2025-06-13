@@ -7,50 +7,43 @@
     <th:block th:replace="~{fragments/utils :: style}" />
     <title>Pokémon</title>
 </head>
-<body class="">
-    
+<body class="bg-dark text-white">
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
     </header>
-
     <main>
-        <div class="container my-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-
-                <a class="btn btn-warning btn-lg fw-bold rounded-pill" th:href="@{/pokemons/create}">Aggiungi Pokémon</a>
-                <form th:action="@{/pokemons/search}" class=" flex-grow-1" style="max-width: 500px;">
-                    <div class="input-group">
-                        <input type="text" required name="query" class="form-control" placeholder="Cerca Pokémon per nome...">
-                        <button type="submit" class="btn btn-primary">Cerca</button>
-                    </div>
-                </form>
-
+        <div class="container py-4 my-3 ">
+            <div class="row mb-4 align-items-center g-3 ">
+                <div class="col-auto">
+                    <a class="btn btn-warning btn-lg fw-bold rounded-pill" th:href="@{/pokemons/create}">Aggiungi Pokémon</a>
+                </div>
+                <div class="col">
+                    <form th:action="@{/pokemons/search}" class="w-100">
+                        <div class="input-group">
+                            <input type="text" required name="query" class="form-control" placeholder="Cerca Pokémon per nome...">
+                            <button type="submit" class="btn btn-primary">Cerca</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div th:if="${pokemons.size() > 0}" class="row row-cols-1 row-cols-md-2 g-4">
-                <div class="col" th:each="pokemon: ${pokemons}" th:object="${pokemon}">
-                    <div class="card border-dark h-100">
+            <div th:if="${pokemons.size() > 0}" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center my-3">
+                <div class="col d-flex align-items-stretch" th:each="pokemon: ${pokemons}" th:object="${pokemon}">
+                    <div class="card bg-secondary text-white border-light h-100 shadow-sm w-100" style="min-width: 180px; max-width: 230px; margin: 0 auto;">
                         <a th:href="@{/pokemons/{slug}(slug=${pokemon.slug})}" class="text-decoration-none">
-                            <img th:src="@{*{imageUrl}}" class="card-img-top p-3 bg-white" th:alt="*{name}">
-                            <div class="card-body text-center bg-light">
-                                <h5 class="card-title text-primary fw-bold text-capitalize">[[*{name}]]</h5>
+                            <img th:src="@{*{imageUrl}}" class="card-img-top p-3 bg-white" th:alt="*{name}" style="object-fit: contain; height: 160px; border-radius: 1rem;">
+                            <div class="card-body text-center bg-dark">
+                                <h5 class="card-title text-warning fw-bold text-capitalize mb-2">[[*{name}]]</h5>
                             </div>
                         </a>
-                        <div class="card-body text-center d-flex justify-content-center bg-light">
-
+                        <div class="card-body text-center d-flex justify-content-center align-items-end bg-dark pt-0">
                             <button 
                             class="btn btn-success fw-bold rounded-pill mx-auto"
                             th:data-bs-target="'#delete-modal-'+*{slug}"
                             data-bs-toggle="modal"
                             th:data-pokemon-name="*{name}"
-                            
-                            
                             >
                                 Libera
                             </button >
-                            
-                            <!-- <form th:action="@{/pokemons/delete/{slug}(slug=${pokemon.slug})}" method="post">
-                                <button class="btn btn-success fw-bold rounded-pill mx-auto" type="submit">Libera Pokémon</button>
-                            </form> -->
                             <div class="modal fade" th:id="*{'delete-modal-' + slug}" tabindex="-1" 
                                         th:aria-labelledby="${'delete-modal-' + slug + 'Label'}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -71,25 +64,18 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div th:unless="${pokemons.size() > 0}" class="text-center">
+            <div th:unless="${pokemons.size() > 0}" class="text-center mt-5">
                 <h2 class="text-danger fw-bold">Nessun Pokémon trovato</h2>
             </div>
         </div>
     </main>
-
-    <footer>
+    <footer class="bg-dark text-light py-3 mt-5 w-100 text-center border-top border-secondary">
         <th:block th:replace="~{fragments/utils :: footer}" />
-
-
     </footer>
-
     <th:block th:replace="~{fragments/utils :: js}" />
 </body>
 </html>

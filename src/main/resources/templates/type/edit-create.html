@@ -7,13 +7,11 @@
     <th:block th:replace="~{fragments/utils::style}" />
     <title th:text="${edit} ? 'Modifica Tipo' : 'Crea Nuovo Tipo'"></title>
 </head>
-<body class=" text-white">
-    
+<body class="text-white d-flex flex-column min-vh-100">
     <header>
         <th:block th:replace="~{fragments/utils :: navbar}" />
     </header>
-
-    <main>
+    <main class="flex-grow-1">
         <div class="container my-5">
          
 <h1 class="text-center mb-5" th:text="${edit} ? 'Modifica Tipo Pokémon: ' + ${type.name} : 'Crea Nuovo Tipo Pokémon'"></h1>
@@ -48,8 +46,7 @@
             </div>
         </div>
     </main>
-
-    <footer>
+    <footer class="bg-dark text-light py-3 mt-auto w-100 text-center">
         <th:block th:replace="~{fragments/utils :: footer}" />
     </footer>
 
