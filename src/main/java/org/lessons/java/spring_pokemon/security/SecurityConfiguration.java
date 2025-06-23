@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/types/delete/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/pokemons/delete/**").hasAuthority("ADMIN")
                 .requestMatchers("/types", "/types/**").hasAuthority("ADMIN")
-                .requestMatchers("/pokemons", "/pokemons/**").hasAnyAuthority("ADMIN", "USER")              
+                .requestMatchers("/pokemons", "/pokemons/**").hasAnyAuthority("ADMIN")              
                 .and()
                 .formLogin().defaultSuccessUrl("/pokemons")
                 .and()
