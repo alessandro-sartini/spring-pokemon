@@ -31,26 +31,25 @@ public class PokemonService {
         return pokemonRepository.findAll(Sort.by("name"));
     }
 
-    public Optional<Pokemon> findBySlug(String slug){
+    public Optional<Pokemon> findBySlug(String slug) {
         return pokemonRepository.findBySlug(slug);
     }
 
     public Optional<Pokemon> findById(Integer id) {
 
-       
-        return  pokemonRepository.findById(id);
+        return pokemonRepository.findById(id);
 
     }
+
     public Pokemon getById(Integer id) {
 
         Optional<Pokemon> pokemonAttempt = pokemonRepository.findById(id);
         return pokemonAttempt.get();
     }
 
-    public List<Pokemon> serchByName(String query){
-      
+    public List<Pokemon> serchByName(String query) {
 
-        return   pokemonRepository.findByNameContaining(query);
+        return pokemonRepository.findByNameContaining(query);
     }
 
     public Pokemon getBySlug(String slug) {
