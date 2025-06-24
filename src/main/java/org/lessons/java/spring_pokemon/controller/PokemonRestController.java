@@ -31,51 +31,58 @@ public class PokemonRestController {
     @Autowired
     private PokemonService pokemonService;
 
+   
     @GetMapping
-    public List<Pokemon> index(@RequestParam(name = "type", required = false) Optional<String> typeName) {
-        return pokemonService.findAll(typeName);
+    public ResponseEntity<List<Pokemon>> index(@RequestParam(name = "type", required = false) Optional<String> typeName) {
+        List<Pokemon> pokemons = pokemonService.findAll(typeName);
+
+        if (pokemons.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+        } else {
+            return new ResponseEntity<>(pokemons, HttpStatus.OK); 
+        }
     }
 
-    @GetMapping("/sortedByName")
-    public List<Pokemon> indexByName() {
-
-        return pokemonService.findAllSortedByName();
-    }
-
+    
     @GetMapping("/byId/{id}")
     public ResponseEntity<Pokemon> show(@PathVariable Integer id) {
         Optional<Pokemon> pokemOptional = pokemonService.findById(id);
-
+        
         if (pokemOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+            
         }
-
+        
         return new ResponseEntity<>(pokemOptional.get(), HttpStatus.OK);
     }
-
+    
     @GetMapping("/bySlug/{slug}")
     public ResponseEntity<Pokemon> show(@PathVariable String slug) {
         Optional<Pokemon> pokemOptional = pokemonService.findBySlug(slug);
-
+        
         if (pokemOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+            
         }
-
+        
         return new ResponseEntity<>(pokemOptional.get(), HttpStatus.OK);
     }
+    
+    // @GetMapping("/sortedByName")
+    // public List<Pokemon> indexByName() {
 
+    //     return pokemonService.findAllSortedByName();
+    // }
     // @PostMapping("/create")
     // public ResponseEntity<Pokemon> create(@Valid @RequestBody Pokemon pokemon) {
-
+        
     // return new ResponseEntity<>(pokemonService.create(pokemon), HttpStatus.OK);
     // }
-
+    
     // @PutMapping("/edit/{id}")
     // public ResponseEntity<Pokemon> update(@Valid @RequestBody Pokemon pokemon,
     // @PathVariable Integer id) {
-
+        
     // if (!pokemonService.existById(id)) {
     // return new ResponseEntity<Pokemon>(HttpStatus.NOT_FOUND);
     // }
