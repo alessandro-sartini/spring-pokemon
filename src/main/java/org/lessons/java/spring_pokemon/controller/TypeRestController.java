@@ -2,7 +2,7 @@ package org.lessons.java.spring_pokemon.controller;
 
 import java.util.List;
 
-import org.lessons.java.spring_pokemon.model.Pokemon;
+// import org.lessons.java.spring_pokemon.model.Pokemon;
 import org.lessons.java.spring_pokemon.model.Type;
 import org.lessons.java.spring_pokemon.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,10 @@ package org.lessons.java.spring_pokemon.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.lessons.java.spring_pokemon.dto.Mapper;
+import org.lessons.java.spring_pokemon.dto.PokemonDTO;
 import org.lessons.java.spring_pokemon.model.Pokemon;
 import org.lessons.java.spring_pokemon.repository.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,14 @@ public class PokemonService {
 
     @Autowired
     private PokemonRepository pokemonRepository;
+
+public List<PokemonDTO> findAllDtos() {
+    return pokemonRepository.findAll().stream()
+        .map(Mapper::toDto)
+        .collect(Collectors.toList());
+}
+
+
 
     public List<Pokemon> findAll() {
         return pokemonRepository.findAll();

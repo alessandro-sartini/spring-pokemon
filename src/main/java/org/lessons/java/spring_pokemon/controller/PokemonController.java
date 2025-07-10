@@ -38,7 +38,7 @@ public class PokemonController {
         return "pokemon/index";
     }
 
-    @GetMapping("/{slug}")
+    @GetMapping("/{slug}")// appp/com/pokemons/mew-151
     public String show(@PathVariable String slug, Model model) {
 
         model.addAttribute("pokemon", pokemonService.getBySlug(slug));
@@ -55,7 +55,7 @@ public class PokemonController {
         return "pokemon/edit-create";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search")// appp/com/pokemons/search?name=mew
     public String search(@RequestParam String query, Model model) {
         List<Pokemon> pokemons= pokemonService.serchByName(query);
         model.addAttribute("pokemons", pokemons);
